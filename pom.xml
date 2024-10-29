@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>jbossmysql</artifactId>
+    <groupId>com.microsoft.azure.appservice.examples</groupId>
+    <version>0.1-SNAPSHOT</version>
+    <packaging>war</packaging>
+    <name>${project.artifactId}</name>
+    <description>This is a simple CRUD application. It uses Jakarta EE 10 (Enterprise Java Beans, 
+        Context and Dependency Injection, Java Persistence API, Java Server Faces, and Bean Validation). 
+    </description>
+    <properties>
+        <jakartaee.api.version>10.0.0</jakartaee.api.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+    <dependencies>
+        <dependency>
+            <groupId>jakarta.platform</groupId>
+            <artifactId>jakarta.jakartaee-api</artifactId>
+            <version>${jakartaee.api.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <!-- Required by the MySQL data source in the local WildFly server -->
+        <dependency>
+            <groupId>com.mysql</groupId>
+            <artifactId>mysql-connector-j</artifactId>
+            <version>9.1.0</version>
+        </dependency>
+    </dependencies>
+    <build>
+        <finalName>${project.artifactId}</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.13.0</version>
+                <inherited>true</inherited>
+                <configuration>
+                    <source>17</source>
+                    <target>17</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>3.3.1</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>3.4.0</version>
+                <configuration>
+                    <failOnMissingWebXml>false</failOnMissingWebXml>
+                </configuration>
+            </plugin>
+            <!-- Use WildFly for local development -->
+            <plugin>
+                <groupId>org.wildfly.plugins</groupId>
+                <artifactId>wildfly-maven-plugin</artifactId>
+                <version>5.0.1.Final</version>
+                <configuration>
+                    <runtime-name>ROOT.war</runtime-name>
+                    <!-- Add MySQL data source -->
+                    <commands>
+                        <comamnd>deploy target/jbossmysql/WEB-INF/lib/mysql-connector-j-9.1.0.jar</comamnd>
+                        <comamnd>data-source add --name=MySQLDS --driver-name=mysql-connector-j-9.1.0.jar --jndi-name=java:jboss/MySQLDS --connection-url=${MYSQL_URL} --user-name=${MYSQL_USER} --password=${MYSQL_PASSWORD} --enabled=true --use-java-context=true</comamnd>
+                    </commands>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>
