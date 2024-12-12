@@ -9,15 +9,15 @@ products:
 - azure-app-service
 - azure-database-mysql
 - azure-virtual-network
-urlFragment: msdocs-tomcat-mysql-sample-app
+urlFragment: msdocs-jboss-mysql-sample-app
 name: Deploy a JBoss web app with MySQL in Azure
 description: This is a JBoss web app using Servlet 6.0 and the Azure Database for MySQL flexible server. 
 ---
 <!-- YAML front-matter schema: https://review.learn.microsoft.com/en-us/help/contribute/samples/process/onboarding?branch=main#supported-metadata-fields-for-readmemd -->
 
-# Deploy a Tomcat web app with MySQL in Azure
+# Deploy a JBoss EAP web app with MySQL in Azure
 
-This is a Java EE 10 web app that uses the Azure Database for MySQL flexible server. This app is designed to be be run locally with the WildFly Maven plugin and then deployed to a JBoss 8 EAP container in Azure App Service. You can either deploy this project by following the tutorial [*Deploy a JBoss web app with MySQL in Azure*](https://docs.microsoft.com/azure/app-service/tutorial-java-jboss-mysql-app). <!-- or by using the [Azure Developer CLI (azd)](https://learn.microsoft.com/azure/developer/azure-developer-cli/overview) according to the instructions below. -->
+This is a Java EE 10 web app that uses the Azure Database for MySQL flexible server. This app is designed to be be run locally with the WildFly Maven plugin and then deployed to a JBoss 8 EAP container in Azure App Service. You can either deploy this project by following the tutorial [*Deploy a JBoss web app with MySQL in Azure*](https://docs.microsoft.com/azure/app-service/tutorial-java-jboss-mysql-app) or by using the [Azure Developer CLI (azd)](https://learn.microsoft.com/azure/developer/azure-developer-cli/overview) according to the instructions below.
 
 ## Run the sample
 
@@ -35,7 +35,7 @@ This project has a [dev container configuration](.devcontainer/), which makes it
 
 1. When you see the message `Your application running on port 8080 is available.`, click **Open in Browser**.
 
-<!-- ### Quick deploy
+### Quick deploy
 
 This project is designed to work well with the [Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/overview), which makes it easier to develop apps locally, deploy them to Azure, and monitor them. 
 
@@ -65,7 +65,7 @@ Steps for deployment:
 
     ```shell
     azd deploy
-    ``` -->
+    ```
 
 ## Getting help
 
